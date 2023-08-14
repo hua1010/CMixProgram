@@ -1,0 +1,6 @@
+/build
+*~
+*kdev4*
+.vs
+Debug
+x64
