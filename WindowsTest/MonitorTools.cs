@@ -16,6 +16,7 @@ namespace WindowsTest
             INPUT_SOURCE = 0x60,
             OSD = 0xCA,
             VOLUME = 0x62,
+            SELECT_COLOR_PRESET = 0x14,
         }
 
         [DllImport("MonitorLib.dll", EntryPoint = "InitList", CharSet = CharSet.Ansi)]

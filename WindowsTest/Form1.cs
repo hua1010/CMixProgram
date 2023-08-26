@@ -27,6 +27,8 @@ namespace WindowsTest
                 return Text;
             }
         }
+        private string[] templist = { "USER", "6500K", "9300K", "SRGB", "5800", "7500" };
+        private byte[] tempIndex = { 0x0B, 0x05, 0x08, 0x01, 0x04, 0x06 };
 
         public Form1()
         {
@@ -37,6 +39,13 @@ namespace WindowsTest
         {
             mMonitorList = MonitorTools.InitList();
             MonitorTools.listProbe(mMonitorList);
+            for(int i = 0; i < templist.Length; i++)
+            {
+                ComboboxItem citem = new ComboboxItem();
+                citem.Text = String.Format("{0}: {1}", tempIndex[i], templist[i]);
+                citem.Value = tempIndex[i];
+                temperature.Items.Add(citem);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,9 +63,15 @@ namespace WindowsTest
             }
             if(devicebox.Items.Count > 0) { 
                 devicebox.SelectedIndex = 0;
-                ComboboxItem item = devicebox.Items[devicebox.SelectedIndex] as ComboboxItem;
-                volumeValue = MonitorTools.getVCPValue(mMonitorList, item.Value, ((byte)MonitorTools.DeviceCode.VOLUME));
-                volume.Text = volumeValue.ToString();
+                try
+                {
+                    ComboboxItem item = devicebox.Items[devicebox.SelectedIndex] as ComboboxItem;
+                    volumeValue = MonitorTools.getVCPValue(mMonitorList, item.Value, ((byte)MonitorTools.DeviceCode.VOLUME));
+                    volume.Text = volumeValue.ToString();
+                }catch (Exception ex)
+                {
+                    MessageBox.Show(String.Format("Device {0} don't support DCC/CI: Message: {1}", devicebox.SelectedIndex, ex.Message));
+                }
             }
         }
 
@@ -136,18 +151,38 @@ namespace WindowsTest
             }
         }
 
+        private void inputlist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0)
+            {
+                ComboboxItem item = inputlist.Items[inputlist.SelectedIndex] as ComboboxItem;
+                MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.INPUT_SOURCE, (byte)item.Value);
+            }
+        }
+
+        private void temperature_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0)
+            {
+                ComboboxItem item = temperature.Items[temperature.SelectedIndex] as ComboboxItem;
+                MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.SELECT_COLOR_PRESET, (byte)item.Value);
+            }
+        }
+
+
         private string SplitVCPString(string str, string code)
         {
-            string vcpString = str.Substring(str.IndexOf(code)+code.Length);
+            string vcpString = str.Substring(str.IndexOf(code) + code.Length);
             StringBuilder buf = new StringBuilder(1024);
             int flag = 0;
             foreach (var item in vcpString)
             {
-                if(item == '(')
+                if (item == '(')
                 {
-                    if (flag != 0)  buf.Append(item);
+                    if (flag != 0) buf.Append(item);
                     flag++;
-                }else if(item == ')')
+                }
+                else if (item == ')')
                 {
                     flag--;
                     if (flag != 0) buf.Append(item);
@@ -159,12 +194,6 @@ namespace WindowsTest
                     break;
             }
             return buf.ToString();
-        }
-
-        private void inputlist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboboxItem item = inputlist.Items[inputlist.SelectedIndex] as ComboboxItem;
-            MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.INPUT_SOURCE, (byte)item.Value);
         }
     }
 }

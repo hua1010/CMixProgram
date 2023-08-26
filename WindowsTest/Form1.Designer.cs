@@ -41,6 +41,8 @@
             this.volume_down = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.inputlist = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.temperature = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -149,7 +151,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(180, 186);
+            this.label5.Location = new System.Drawing.Point(178, 186);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 12);
             this.label5.TabIndex = 13;
@@ -159,17 +161,38 @@
             // 
             this.inputlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inputlist.FormattingEnabled = true;
-            this.inputlist.Location = new System.Drawing.Point(257, 183);
+            this.inputlist.Location = new System.Drawing.Point(302, 183);
             this.inputlist.Name = "inputlist";
             this.inputlist.Size = new System.Drawing.Size(227, 20);
             this.inputlist.TabIndex = 14;
             this.inputlist.SelectedIndexChanged += new System.EventHandler(this.inputlist_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(178, 223);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 12);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Color temperature:";
+            // 
+            // temperature
+            // 
+            this.temperature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.temperature.FormattingEnabled = true;
+            this.temperature.Location = new System.Drawing.Point(302, 220);
+            this.temperature.Name = "temperature";
+            this.temperature.Size = new System.Drawing.Size(227, 20);
+            this.temperature.TabIndex = 16;
+            this.temperature.SelectedIndexChanged += new System.EventHandler(this.temperature_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.temperature);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.inputlist);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.volume_down);
@@ -184,7 +207,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "t";
+            this.Text = "DDC/CI调试DEMO";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -206,6 +229,8 @@
         private System.Windows.Forms.Button volume_down;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox inputlist;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox temperature;
     }
 }
 
