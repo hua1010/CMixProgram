@@ -43,6 +43,10 @@
             this.inputlist = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.temperature = new System.Windows.Forms.ComboBox();
+            this.red_gain = new System.Windows.Forms.TextBox();
+            this.green_gain = new System.Windows.Forms.TextBox();
+            this.blue_gain = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -186,11 +190,54 @@
             this.temperature.TabIndex = 16;
             this.temperature.SelectedIndexChanged += new System.EventHandler(this.temperature_SelectedIndexChanged);
             // 
+            // red_gain
+            // 
+            this.red_gain.Location = new System.Drawing.Point(250, 272);
+            this.red_gain.MaxLength = 3;
+            this.red_gain.Name = "red_gain";
+            this.red_gain.Size = new System.Drawing.Size(67, 21);
+            this.red_gain.TabIndex = 17;
+            this.red_gain.TextChanged += new System.EventHandler(this.red_gain_TextChanged);
+            this.red_gain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.red_gain_KeyPress);
+            // 
+            // green_gain
+            // 
+            this.green_gain.Location = new System.Drawing.Point(323, 272);
+            this.green_gain.MaxLength = 3;
+            this.green_gain.Name = "green_gain";
+            this.green_gain.Size = new System.Drawing.Size(72, 21);
+            this.green_gain.TabIndex = 18;
+            this.green_gain.TextChanged += new System.EventHandler(this.green_gain_TextChanged);
+            this.green_gain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.green_gain_KeyPress);
+            // 
+            // blue_gain
+            // 
+            this.blue_gain.Location = new System.Drawing.Point(401, 272);
+            this.blue_gain.MaxLength = 3;
+            this.blue_gain.Name = "blue_gain";
+            this.blue_gain.Size = new System.Drawing.Size(69, 21);
+            this.blue_gain.TabIndex = 19;
+            this.blue_gain.TextChanged += new System.EventHandler(this.blue_gain_TextChanged);
+            this.blue_gain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.blue_gain_KeyPress);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(178, 275);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 12);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "RGB Gain:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.blue_gain);
+            this.Controls.Add(this.green_gain);
+            this.Controls.Add(this.red_gain);
             this.Controls.Add(this.temperature);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.inputlist);
@@ -231,6 +278,10 @@
         private System.Windows.Forms.ComboBox inputlist;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox temperature;
+        private System.Windows.Forms.TextBox red_gain;
+        private System.Windows.Forms.TextBox green_gain;
+        private System.Windows.Forms.TextBox blue_gain;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -17,6 +17,9 @@ namespace WindowsTest
             OSD = 0xCA,
             VOLUME = 0x62,
             SELECT_COLOR_PRESET = 0x14,
+            RED_GAIN = 0x16,
+            GREEN_GAIN = 0x18,
+            BLUE_GAIN =  0x1A,
         }
 
         [DllImport("MonitorLib.dll", EntryPoint = "InitList", CharSet = CharSet.Ansi)]

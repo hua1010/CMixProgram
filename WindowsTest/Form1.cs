@@ -166,6 +166,10 @@ namespace WindowsTest
             {
                 ComboboxItem item = temperature.Items[temperature.SelectedIndex] as ComboboxItem;
                 MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.SELECT_COLOR_PRESET, (byte)item.Value);
+
+                red_gain.Text = MonitorTools.getVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.RED_GAIN).ToString();
+                green_gain.Text = MonitorTools.getVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.GREEN_GAIN).ToString();
+                blue_gain.Text = MonitorTools.getVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.BLUE_GAIN).ToString();
             }
         }
 
@@ -195,5 +199,66 @@ namespace WindowsTest
             }
             return buf.ToString();
         }
+
+        private void red_gain_TextChanged(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0 && temperature.SelectedIndex >= 0 && temperature.SelectedIndex < temperature.Items.Count )
+            {
+                byte gain = Convert.ToByte(red_gain.Text, 10);
+                MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.RED_GAIN, gain);
+            }
+        }
+
+        private void green_gain_TextChanged(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0 && temperature.SelectedIndex >= 0 && temperature.SelectedIndex < temperature.Items.Count)
+            {
+                byte gain = Convert.ToByte(green_gain.Text, 10);
+                MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.GREEN_GAIN, gain);
+            }
+        }
+
+        private void blue_gain_TextChanged(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0 && temperature.SelectedIndex >= 0 && temperature.SelectedIndex < temperature.Items.Count)
+            {
+                byte gain = Convert.ToByte(blue_gain.Text, 10);
+                MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.BLUE_GAIN, gain);
+            }
+        }
+
+        private void red_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void green_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void blue_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
     }
 }
