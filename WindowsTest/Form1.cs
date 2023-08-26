@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -59,18 +60,6 @@ namespace WindowsTest
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if(devicebox.Items.Count > 0)
-            {
-                StringBuilder buf = new StringBuilder(1024);//指定的buf大小必须大于传入的字符长度
-                int index = devicebox.SelectedIndex;
-                ComboboxItem item = devicebox.Items[index]as ComboboxItem;
-                MonitorTools.getRawCapabilities(mMonitorList, item.Value, buf);
-                rawCapabilities.Text = buf.ToString();
-            }
-        }
-
         private void volume_up_Click(object sender, EventArgs e)
         {
             if(devicebox.Items.Count > 0)
@@ -106,11 +95,76 @@ namespace WindowsTest
                 ComboboxItem item = devicebox.Items[devicebox.SelectedIndex] as ComboboxItem;
                 volumeValue = MonitorTools.getVCPValue(mMonitorList, item.Value, ((byte)MonitorTools.DeviceCode.VOLUME));
                 volume.Text = volumeValue.ToString();
+                rawCapabilities.Clear();
+                inputlist.Items.Clear();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(String.Format("Device {0} don't support DCC/CI: Message: {1}", devicebox.SelectedIndex ,ex.Message));
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (devicebox.Items.Count > 0)
+            {
+                StringBuilder buf = new StringBuilder(1024);//指定的buf大小必须大于传入的字符长度
+                int index = devicebox.SelectedIndex;
+                ComboboxItem item = devicebox.Items[index] as ComboboxItem;
+                MonitorTools.getRawCapabilities(mMonitorList, item.Value, buf);
+                rawCapabilities.Text = buf.ToString();
+
+
+                string code_num = MonitorTools.DeviceCode.INPUT_SOURCE.ToString("X");
+                string vcpString = SplitVCPString(buf.ToString(), "vcp");
+                string commandlist = SplitVCPString(vcpString, code_num);
+
+                string[] command = commandlist.Split(' ');
+                string match = @"[a-z0-9]+";
+
+                for (int num = 0; num < command.Length; num++)
+                {
+                    if(Regex.IsMatch(command[num], match))
+                    {
+                        byte source = Convert.ToByte(command[num], 16);
+                        ComboboxItem citem = new ComboboxItem();
+                        citem.Text = String.Format("{0}: {1}", source, "UnKnown InputSource");
+                        citem.Value = source;
+                        inputlist.Items.Add(citem);
+                    }
+                }
+            }
+        }
+
+        private string SplitVCPString(string str, string code)
+        {
+            string vcpString = str.Substring(str.IndexOf(code)+code.Length);
+            StringBuilder buf = new StringBuilder(1024);
+            int flag = 0;
+            foreach (var item in vcpString)
+            {
+                if(item == '(')
+                {
+                    if (flag != 0)  buf.Append(item);
+                    flag++;
+                }else if(item == ')')
+                {
+                    flag--;
+                    if (flag != 0) buf.Append(item);
+                }
+                else
+                    buf.Append(item);
+
+                if (flag == 0)
+                    break;
+            }
+            return buf.ToString();
+        }
+
+        private void inputlist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboboxItem item = inputlist.Items[inputlist.SelectedIndex] as ComboboxItem;
+            MonitorTools.setVCPValue(mMonitorList, devicebox.SelectedIndex, (byte)MonitorTools.DeviceCode.INPUT_SOURCE, (byte)item.Value);
         }
     }
 }

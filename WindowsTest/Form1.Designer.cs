@@ -39,12 +39,14 @@
             this.volume = new System.Windows.Forms.Label();
             this.volume_up = new System.Windows.Forms.Button();
             this.volume_down = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.inputlist = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(189, 176);
+            this.label1.Location = new System.Drawing.Point(280, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
@@ -53,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(248, 176);
+            this.label2.Location = new System.Drawing.Point(339, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(11, 12);
             this.label2.TabIndex = 1;
@@ -61,7 +63,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(191, 211);
+            this.button1.Location = new System.Drawing.Point(168, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 23);
             this.button1.TabIndex = 2;
@@ -72,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 265);
+            this.label3.Location = new System.Drawing.Point(178, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 3;
@@ -83,7 +85,7 @@
             this.devicebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.devicebox.FormattingEnabled = true;
             this.devicebox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.devicebox.Location = new System.Drawing.Point(250, 262);
+            this.devicebox.Location = new System.Drawing.Point(239, 66);
             this.devicebox.Name = "devicebox";
             this.devicebox.Size = new System.Drawing.Size(290, 20);
             this.devicebox.TabIndex = 5;
@@ -91,7 +93,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(191, 296);
+            this.button2.Location = new System.Drawing.Point(168, 141);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 23);
             this.button2.TabIndex = 6;
@@ -101,7 +103,7 @@
             // 
             // rawCapabilities
             // 
-            this.rawCapabilities.Location = new System.Drawing.Point(325, 298);
+            this.rawCapabilities.Location = new System.Drawing.Point(302, 143);
             this.rawCapabilities.Name = "rawCapabilities";
             this.rawCapabilities.Size = new System.Drawing.Size(335, 21);
             this.rawCapabilities.TabIndex = 8;
@@ -109,7 +111,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(191, 343);
+            this.label4.Location = new System.Drawing.Point(178, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 9;
@@ -118,7 +120,7 @@
             // volume
             // 
             this.volume.AutoSize = true;
-            this.volume.Location = new System.Drawing.Point(248, 343);
+            this.volume.Location = new System.Drawing.Point(235, 105);
             this.volume.Name = "volume";
             this.volume.Size = new System.Drawing.Size(11, 12);
             this.volume.TabIndex = 10;
@@ -126,7 +128,7 @@
             // 
             // volume_up
             // 
-            this.volume_up.Location = new System.Drawing.Point(283, 338);
+            this.volume_up.Location = new System.Drawing.Point(270, 100);
             this.volume_up.Name = "volume_up";
             this.volume_up.Size = new System.Drawing.Size(36, 23);
             this.volume_up.TabIndex = 11;
@@ -136,7 +138,7 @@
             // 
             // volume_down
             // 
-            this.volume_down.Location = new System.Drawing.Point(325, 338);
+            this.volume_down.Location = new System.Drawing.Point(312, 100);
             this.volume_down.Name = "volume_down";
             this.volume_down.Size = new System.Drawing.Size(31, 23);
             this.volume_down.TabIndex = 12;
@@ -144,11 +146,32 @@
             this.volume_down.UseVisualStyleBackColor = true;
             this.volume_down.Click += new System.EventHandler(this.volume_down_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(180, 186);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 12);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "InputSouce:";
+            // 
+            // inputlist
+            // 
+            this.inputlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.inputlist.FormattingEnabled = true;
+            this.inputlist.Location = new System.Drawing.Point(257, 183);
+            this.inputlist.Name = "inputlist";
+            this.inputlist.Size = new System.Drawing.Size(227, 20);
+            this.inputlist.TabIndex = 14;
+            this.inputlist.SelectedIndexChanged += new System.EventHandler(this.inputlist_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.inputlist);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.volume_down);
             this.Controls.Add(this.volume_up);
             this.Controls.Add(this.volume);
@@ -181,6 +204,8 @@
         private System.Windows.Forms.Label volume;
         private System.Windows.Forms.Button volume_up;
         private System.Windows.Forms.Button volume_down;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox inputlist;
     }
 }
 

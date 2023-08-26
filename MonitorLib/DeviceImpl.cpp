@@ -116,11 +116,7 @@ const std::string &DeviceImpl::getRawCapabilities()
 			if (szCapabilitiesString != NULL)
 			{
 				// Get the capabilities string.
-				bSuccess = CapabilitiesRequestAndCapabilitiesReply(
-					_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor,
-					szCapabilitiesString,
-					cchStringLength
-					);
+				bSuccess = CapabilitiesRequestAndCapabilitiesReply(_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor, szCapabilitiesString, cchStringLength);
 				if (bSuccess)
 					_caps = szCapabilitiesString;
 
@@ -185,22 +181,17 @@ BOOL CALLBACK MonitorEnumProc(
 	LPPHYSICAL_MONITOR pPhysicalMonitors = NULL;
 
 	// Get the number of physical monitors.
-	BOOL bSuccess = GetNumberOfPhysicalMonitorsFromHMONITOR(
-	  hMonitor, 
-	  &cPhysicalMonitors
-	   );
+	BOOL bSuccess = GetNumberOfPhysicalMonitorsFromHMONITOR( hMonitor, &cPhysicalMonitors);
 
 	if (bSuccess)
 	{
 		// Allocate the array of PHYSICAL_MONITOR structures.
-		pPhysicalMonitors = (LPPHYSICAL_MONITOR)malloc(
-			cPhysicalMonitors* sizeof(PHYSICAL_MONITOR));
+		pPhysicalMonitors = (LPPHYSICAL_MONITOR)malloc( cPhysicalMonitors* sizeof(PHYSICAL_MONITOR));
 
 		if (pPhysicalMonitors != NULL)
 		{
 			// Get the array.
-			bSuccess = GetPhysicalMonitorsFromHMONITOR(
-				hMonitor, cPhysicalMonitors, pPhysicalMonitors);
+			bSuccess = GetPhysicalMonitorsFromHMONITOR(hMonitor, cPhysicalMonitors, pPhysicalMonitors);
 			if (bSuccess)
 			{
 				PhysicalMonitor *monitor = new PhysicalMonitor(monitorname, cPhysicalMonitors, pPhysicalMonitors);
