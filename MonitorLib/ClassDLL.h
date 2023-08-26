@@ -20,6 +20,15 @@ namespace GeneralDDC {
 
 	//获取设备名字
 	DLL_API void __stdcall getDeviceName(List* mList, int index, char* name);
+
+	//获取设备功能字符串
+	DLL_API void __stdcall getRawCapabilities(List* mList, int index, char* raw);
+
+	//获取VCP的值
+	DLL_API unsigned long __stdcall getVCPValue(List* mList, int index, unsigned char code);
+
+	//设置VCP的值
+	DLL_API void __stdcall setVCPValue(List* mList, int index, unsigned char code, unsigned long value);
 }
 
 

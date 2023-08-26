@@ -11,29 +11,12 @@ namespace GeneralDDC {
 
 std::string win32_to_utf8(const wchar_t* buffer)
 {
-        int nChars = ::WideCharToMultiByte(
-                CP_UTF8,
-                0,
-                buffer,
-                -1,
-                NULL,
-                0,
-                NULL,
-                NULL);
+        int nChars = ::WideCharToMultiByte(CP_UTF8, 0, buffer, -1,NULL, 0, NULL, NULL);
         if (nChars == 0) return "";
 
         std::string newbuffer;
-        newbuffer.resize(nChars) ;
-        ::WideCharToMultiByte(
-                CP_UTF8,
-                0,
-                buffer,
-                -1,
-                const_cast< char* >(newbuffer.c_str()),
-                nChars,
-                NULL,
-                NULL); 
-
+        newbuffer.resize(nChars);
+        ::WideCharToMultiByte( CP_UTF8, 0, buffer, -1, const_cast< char* >(newbuffer.c_str()), nChars, NULL, NULL); 
         return newbuffer;
 }
 
