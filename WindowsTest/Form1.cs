@@ -16,7 +16,7 @@ namespace WindowsTest
     public partial class Form1 : Form
     {
         IntPtr mMonitorList;
-        private ulong volumeValue = 0;
+        private UInt32 volumeValue = 0;
         public class ComboboxItem
         {
             public string Text { get; set; }

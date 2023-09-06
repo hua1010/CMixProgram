@@ -38,9 +38,9 @@ namespace WindowsTest
         public static extern void getRawCapabilities(IntPtr ptr, int index, StringBuilder msg);
 
         [DllImport("MonitorLib.dll", EntryPoint = "getVCPValue", CharSet = CharSet.Ansi)]
-        public static extern ulong getVCPValue(IntPtr ptr, int index, byte code);
+        public static extern UInt32 getVCPValue(IntPtr ptr, int index, byte code);
 
         [DllImport("MonitorLib.dll", EntryPoint = "setVCPValue", CharSet = CharSet.Ansi)]
-        public static extern ulong setVCPValue(IntPtr ptr, int index, byte code, ulong value);
+        public static extern void setVCPValue(IntPtr ptr, int index, byte code, UInt32 value);
     }
 }
