@@ -46,6 +46,7 @@ namespace WindowsTest
                 citem.Value = tempIndex[i];
                 temperature.Items.Add(citem);
             }
+            Text += Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
